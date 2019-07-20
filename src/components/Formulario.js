@@ -1,6 +1,25 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 
 function Formulario(){
+  
+  const[criptomonedas, guardarCriptomonedas] = useState([]);
+
+  useEffect(() => {
+    
+    // Implementacion de la consulta
+    const consultarAPI = async () => {
+      const url = 'https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10&tsym=USD';
+      const resultado = await axios.get(url);
+
+      // Colocar respuesta en el state
+      guardarCriptomonedas(resultado.data.Data);
+    }
+    // Ejecución de la consulta
+    consultarAPI();
+
+  }, []);
+
   return(
     <form>
       <div className="row">
