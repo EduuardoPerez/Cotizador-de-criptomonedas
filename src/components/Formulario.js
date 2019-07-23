@@ -5,6 +5,9 @@ import axios from 'axios';
 function Formulario(){
   
   const[criptomonedas, guardarCriptomonedas] = useState([]);
+  const[monedaCotizar, guardarMonedaCotizar] = useState('');
+  const[criptoCotizar, guardarCriptoCotizar] = useState('');
+  const[error, guardarError] = useState(false);
 
   useEffect(() => {
     
@@ -27,6 +30,7 @@ function Formulario(){
         <label>Elige tu moneda</label>
         <select
           className="u-full-width"
+          onChange={e => guardarMonedaCotizar(e.target.value)}
         >
           <option value="">Elige tu moneda</option>
           <option value="USD">Dolar estadounidense</option>
@@ -40,7 +44,9 @@ function Formulario(){
           <label>Elige tu criptomoneda</label>
           <select
             className="u-full-width"
+            onChange={e => guardarCriptoCotizar(e.target.value)}
           >
+            <option value="">Elige tu criptomoneda</option>
             {criptomonedas.map(criptomoneda => (
               <Criptomoneda
                 key={criptomoneda.CoinInfo.Id}
