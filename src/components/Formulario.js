@@ -24,8 +24,24 @@ function Formulario(){
 
   }, []);
 
+  // Validar que el usuario complete los campos
+  const cotizarMoneda = e => {
+    e.preventDefault();
+
+    // Validar si ambos campos están llenos
+    if(monedaCotizar==='' || criptoCotizar===''){
+      guardarError(true);
+      return;
+    }
+
+    // Pasar los datos al componente principal
+    guardarError(false);
+  }
+
   return(
-    <form>
+    <form
+      onSubmit={cotizarMoneda}
+    >
       <div className="row">
         <label>Elige tu moneda</label>
         <select
@@ -56,6 +72,7 @@ function Formulario(){
           </select>
         </div>
       </div>
+      <input type="submit" className="button-primary u-full-width" value="Calcular"/>
     </form>
   );
 }
